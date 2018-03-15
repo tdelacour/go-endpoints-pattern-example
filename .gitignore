@@ -1,2 +1,5 @@
 # swap files
 *.swp
+
+# binary
+cmd
