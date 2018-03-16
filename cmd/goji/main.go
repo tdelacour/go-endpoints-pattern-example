@@ -11,13 +11,21 @@ import (
 // We play with Goji!
 
 func fooMiddleware(inner http.Handler) http.Handler {
-	log.Printf("Foo\n")
-	return inner
+	mw := func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Do a foo thing\n")
+		inner.ServeHTTP(w, r)
+		log.Printf("Finish foo and inner\n")
+	}
+	return http.HandlerFunc(mw)
 }
 
 func barMiddleware(inner http.Handler) http.Handler {
-	log.Printf("Bar\n")
-	return inner
+	mw := func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Do a bar thing\n")
+		inner.ServeHTTP(w, r)
+		log.Printf("Finish bar and inner\n")
+	}
+	return http.HandlerFunc(mw)
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
