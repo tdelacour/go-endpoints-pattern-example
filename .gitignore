@@ -2,4 +2,5 @@
 *.swp
 
 # binary
-cmd
+cmd/goji/goji
+cmd/barebone/barebone
